@@ -1,4 +1,16 @@
-var loggedIn = false
+var loggedIn;
+
+checkLoginStatus();
+displayUserInfo();
+
+function checkLoginStatus() {
+    const userInfo = JSON.parse(localStorage.getItem('__nostrlogin_accounts'));
+    if (userInfo && userInfo.length > 0) {
+        loggedIn = true
+    } else{
+        loggedIn = false
+    }
+}
 
 // Access the functions from the global object
 const { generateSecretKey, getPublicKey } = NostrTools;
@@ -94,16 +106,17 @@ function displayUserInfo() {
         try {
             if (userInfo && userInfo.length > 0) {
                 const user = userInfo[0];
-                console.log("user from _nostrlogin_accounts: ", user);
-                document.getElementById('username').innerHTML = "Hello, " + user.name;
-                const avatarElement = document.getElementById('avatar');
-                avatarElement.src = user.picture;
-                avatarElement.style.display = 'block';
 
                 // get npub to use with link to nostr
                 let npub = nip19.npubEncode(user.pubkey)
                 var npubElement = document.getElementById('npub');
-                npubElement.innerHTML = "Current npub: <a href='https://njump.me/" + npub + "'>" + npub + "</a>";
+                npubElement.innerHTML = "Hello, <a href='https://njump.me/" + npub + "'>" + user.name + "</a>";
+
+                // set avatar
+                const avatarElement = document.getElementById('avatar');
+                avatarElement.src = user.picture;
+                avatarElement.style.display = 'block';
+
 
             } else {
                 console.log("No user info available (empty array)");
@@ -115,11 +128,10 @@ function displayUserInfo() {
 }
 
 function clearUserInfo() { 
-    // clear user info on logout
-    document.getElementById('username').innerHTML = '';
-    document.getElementById('npub').innerHTML = '';
-    // document.getElementById('pubkey').innerHTML = '';
-    document.getElementById('avatar').style.display = 'none';
+    // localStorage.removeItem('__nostrlogin_accounts');
     loggedIn = false;
+    document.getElementById('npub').innerHTML = '';
+    document.getElementById('avatar').style.display = 'none';
     updateButtonVisibility(); // login/logout button visibility
+
 }

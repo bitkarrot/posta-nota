@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="color-scheme" content="light dark">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"/>
-    <script src='https://www.unpkg.com/nostr-login@latest/dist/unpkg.js' data-perms="sign_event:1,sign_event:0" data-theme="ocean"></script>
+    <script src='https://www.unpkg.com/nostr-login@latest/dist/unpkg.js' data-perms="sign_event:1,sign_event:0" data-theme="dark"></script>
     <script src="https://unpkg.com/nostr-tools/lib/nostr.bundle.js"></script>
     <title>Nota</title>
   </head>
@@ -16,22 +16,20 @@
             <li><strong><a href="/">nota.hivetalk.org</a></strong></li>
           </ul>
           <ul>
+            <li><a href="#" id="setrelays">Relays</a></li>
+            <img id="avatar" src="" alt="Avatar" style="display:none; width: 45px; height: 45px; border-radius: 50%;"/>
             <li><button id="signupButton">Login</button> </li>
             <li><button id="logoutButton">Logout</button> </li>
-            <li><a href="/relay.html" id="setrelays">Relays</a></li>
           </ul>
       </nav>
     </main>
-    <main class="container">
-      <h1>Nota</h1>
+    <main class="container" id="main-container">
       <div>
-        <!-- <p id="pubkey"></p> -->
+      <h1>Nota</h1>
+     </div>
+      <div>
         <p id="npub"></p>
-        <p id="username"></p>
-        <img id="avatar" src="" alt="User Avatar" style="display:none;" width="100px" />
       </div>
-    </main>
-    <main class="container">
       <form id="noteForm">
         <label for="content">Write your Kind 1 Content here:</label>
         <textarea id="content" name="content" rows="8" cols="50"></textarea>
@@ -57,4 +55,6 @@
   </body>
 
   <script src="./nostr.js"></script>
+  <script src="./relay.js"></script>
+
 </html>
