@@ -14,15 +14,25 @@
   </head>
   <body>
     <main class="container">
-      <h1>Nota - A Simple Nostr Client</h1>
+      <nav>
+          <ul>
+            <li><strong>nota.hivetalk.org</strong></li>
+          </ul>
+          <ul>
+            <li><button id="signupButton">Login</button> </li>
+            <li><button id="logoutButton">Logout</button> </li>
+            <li><a href="https://github.com/bitkarrot/nota">GitHub</a></li>
+          </ul>
+      </nav>
+    </main>
+    <main class="container">
+      <h1>Nota - Simple Nostr Send</h1>
       <div>
-          <button id="signupButton">Login to Nostr</button>
-          <button id="logoutButton">Logout</button>
+        <p id="pubkey"></p>
+        <p id="npub"></p>
+        <p id="username"></p>
+        <img id="avatar" src="" alt="User Avatar" style="display:none;" width="100px" />
 
-          <p id="pubkey">Public Key: Not logged in</p>
-          <p id="npub">Npub: Not logged in</p>
-          <p id="username">Username: Not logged in</p>
-          <img id="avatar" src="" alt="User Avatar" style="display:none;" width="100px" />
       </div>
     </main>
   </body>
