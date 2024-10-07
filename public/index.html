@@ -4,10 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="color-scheme" content="light dark">
-    <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css" 
-    />   
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"/>
     <script src='https://www.unpkg.com/nostr-login@latest/dist/unpkg.js' data-perms="sign_event:1,sign_event:0" data-theme="ocean"></script>
     <script src="https://unpkg.com/nostr-tools/lib/nostr.bundle.js"></script>
     <title>Nota</title>
@@ -21,20 +18,42 @@
           <ul>
             <li><button id="signupButton">Login</button> </li>
             <li><button id="logoutButton">Logout</button> </li>
-            <li><a href="https://github.com/bitkarrot/nota">GitHub</a></li>
+            <li><a href="/relay.html" id="setrelays">Relays</a></li>
           </ul>
       </nav>
     </main>
     <main class="container">
-      <h1>Nota - Simple Nostr Send</h1>
+      <h1>Nota</h1>
       <div>
-        <p id="pubkey"></p>
+        <!-- <p id="pubkey"></p> -->
         <p id="npub"></p>
         <p id="username"></p>
         <img id="avatar" src="" alt="User Avatar" style="display:none;" width="100px" />
-
       </div>
     </main>
+    <main class="container">
+      <form id="noteForm">
+        <label for="content">Write your Kind 1 Content here:</label>
+        <textarea id="content" name="content" rows="8" cols="50"></textarea>
+        <input type="submit" value="Preview Note">
+      </form>
+    </main>
+
+    <footer>
+      <hr/>
+      <main class="container">
+        <nav>
+        <ul>
+          Copyright © 2024 Bitkarrot
+        </ul>
+        <ul>
+        <li>
+          <a href="https://github.com/bitkarrot/nota">GitHub</a>
+        </li>
+      </ul>
+      </nav>
+      </main>
+    </footer>
   </body>
 
   <script src="./nostr.js"></script>

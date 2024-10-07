@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"/>
+    <title>Relay List Manager</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 500px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+        .input-group {
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            padding: 8px;
+            width: 70%;
+        }
+        button {
+            padding: 8px 15px;
+            cursor: pointer;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .delete-btn {
+            margin-left: 10px;
+            background-color: #ff4444;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Relay List Manager</h1>
+    
+    <div class="input-group">
+        <input type="text" id="relayInput" placeholder="Enter relay name">
+        <button onclick="addRelay()">Add Relay</button>
+    </div>
+    
+    <ul id="relayList"></ul>
+    
+    <button onclick="deleteSelected()">Delete Selected</button>
+
+    <script>
+        // Load relays from localStorage on page load
+        let relays = localStorage.getItem('relays') ? 
+            localStorage.getItem('relays').split(',') : [];
+
+        function updateDisplay() {
+            const list = document.getElementById('relayList');
+            list.innerHTML = '';
+            relays.forEach((relay, index) => {
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    <input type="checkbox" id="relay${index}">
+                    <label for="relay${index}">${relay}</label>
+                `;
+                list.appendChild(li);
+            });
+            // Update localStorage
+            localStorage.setItem('relays', relays.join(','));
+        }
+
+        function addRelay() {
+            const input = document.getElementById('relayInput');
+            const newRelay = input.value.trim();
+            
+            if (newRelay && !relays.includes(newRelay)) {
+                relays.push(newRelay);
+                input.value = '';
+                updateDisplay();
+            }
+        }
+
+        function deleteSelected() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            const toDelete = Array.from(checkboxes)
+                .map((checkbox, index) => checkbox.checked ? index : -1)
+                .filter(index => index !== -1)
+                .sort((a, b) => b - a);
+            
+            toDelete.forEach(index => {
+                relays.splice(index, 1);
+            });
+            
+            updateDisplay();
+        }
+
+        // Initialize display
+        updateDisplay();
+
+        // Add event listener for Enter key
+        document.getElementById('relayInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                addRelay();
+            }
+        });
+    </script>
+</body>
+</html>
