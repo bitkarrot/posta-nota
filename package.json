@@ -1,0 +1,16 @@
+{
+  "name": "nota",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "bitkarrot",
+  "license": "MIT",
+  "description": "Just post a Nostr note to your relays",
+  "dependencies": {
+    "@picocss/pico": "^2.0.6",
+    "express": "^4.21.0"
+  }
+}

@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
+    <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css" 
+    />   
+    <script src='https://www.unpkg.com/nostr-login@latest/dist/unpkg.js' data-perms="sign_event:1,sign_event:0" data-theme="ocean"></script>
+    <script src="https://unpkg.com/nostr-tools/lib/nostr.bundle.js"></script>
+    <title>Nota</title>
+  </head>
+  <body>
+    <main class="container">
+      <h1>Nota - A Simple Nostr Client</h1>
+      <div>
+          <button id="signupButton">Login to Nostr</button>
+          <button id="logoutButton">Logout</button>
+
+          <p id="pubkey">Public Key: Not logged in</p>
+          <p id="npub">Npub: Not logged in</p>
+          <p id="username">Username: Not logged in</p>
+          <img id="avatar" src="" alt="User Avatar" style="display:none;" width="100px" />
+      </div>
+    </main>
+  </body>
+
+  <script src="./nostr.js"></script>
+</html>
