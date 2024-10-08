@@ -4,7 +4,7 @@ A simple nostr kind 1 posting app.
 No distractions, no nonsense, only posting 
 to help you stay focused and efficient on your content.
 
-[logo](./postanota.png)
+![logo](./postanota.png)
 
 
 ## How to use
