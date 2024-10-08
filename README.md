@@ -19,4 +19,11 @@ That's it!
 
 Super simple. No Extras. 
 
+## Set your relays
+<img width="573" alt="Screenshot 2024-10-08 at 1 32 43 AM" src="https://github.com/user-attachments/assets/af3a6987-ddb0-4d34-b5f1-6c561a078c8e">
+
+## Post a note
+<img width="573" alt="Screenshot 2024-10-08 at 1 32 13 AM" src="https://github.com/user-attachments/assets/b0746583-0adf-41e5-8065-8a561b9e391c">
+
+
 
