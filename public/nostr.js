@@ -1,5 +1,10 @@
 var loggedIn;
 
+let pubkey = "";
+// Access the functions from the global object
+const { relayInit, generateSecretKey, getPublicKey, SimplePool} = NostrTools;
+const nip19 = NostrTools.nip19;
+
 checkLoginStatus();
 displayUserInfo();
 
@@ -11,10 +16,6 @@ function checkLoginStatus() {
         loggedIn = false
     }
 }
-
-// Access the functions from the global object
-const { generateSecretKey, getPublicKey } = NostrTools;
-const nip19 = NostrTools.nip19;
 
 // At the top of your JavaScript file, add:
 function updateButtonVisibility() {
@@ -108,6 +109,7 @@ function displayUserInfo() {
                 const user = userInfo[0];
 
                 // get npub to use with link to nostr
+                pubkey = user.pubkey
                 let npub = nip19.npubEncode(user.pubkey)
                 var npubElement = document.getElementById('npub');
                 npubElement.innerHTML = "Hello, <a href='https://njump.me/" + npub + "'>" + user.name + "</a>";
@@ -135,3 +137,78 @@ function clearUserInfo() {
     updateButtonVisibility(); // login/logout button visibility
 
 }
+
+async function sendEvent(textNote, publicKey, defaultRelays) {
+    try {
+        // let hiveRelays = ['wss://testnet.plebnet.dev/nostrrelay/XmnWyifA'];
+        // Create a list of relays
+        //let hiveRelays = [];
+        //let allrelays = [...hiveRelays, ...defaultRelays];
+        //const relays = [...hiveRelays]
+        let allrelays = defaultRelays;
+        console.log('send Event - Relays:', allrelays);
+        // Create an event
+        const event = {
+            kind: 1,
+            pubkey: publicKey,
+            created_at: Math.floor(Date.now() / 1000),
+            tags: [],
+            content: textNote + '\n via #PostaNota',
+        };
+        console.log('Kind 1 - Event created', event);
+
+        // Request the nos2x extension to sign the event
+        const signedEvent = await window.nostr.signEvent(event);
+        console.log('Signed Event:', signedEvent);
+
+        const eventID = signedEvent['id'];
+        console.log('Event ID', eventID);
+
+        console.log("all relays", allrelays);
+
+        const pool = new window.NostrTools.SimplePool();
+        await Promise.any(pool.publish(allrelays, signedEvent));
+        console.log('Published to at least one relay!');
+
+        const h = pool.subscribeMany(
+            [...allrelays],
+            [
+                {
+                    authors: [publicKey],
+                },
+            ],
+            {
+                onevent(event) {
+                    if (event.id === eventID) {
+                        console.log('Event received:', event);
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: 'Note Sent',
+                            html: `<p>Sent to Nostr successfully!</p> <p>Note: <a href="https://snort.social/e/${eventID}" target="_blank">${eventID}</a></p>`,
+                        });
+                    }
+                },
+                oneose() {
+                    h.close();
+                },
+            },
+        );
+
+
+
+    } catch (error) {
+        console.error('An error occurred:', error);
+        Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Something went wrong posting to Nostr! Try again?',
+        });
+    }
+}
+
+function handleButtonClick() {
+    const content = document.getElementById('content').value;
+    sendEvent(content, pubkey, relays);
+  }

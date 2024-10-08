@@ -1,6 +1,3 @@
-// Load relays from localStorage on page load
-let relays = localStorage.getItem('relays') ? 
-    localStorage.getItem('relays').split(',') : [];
 
 function getRelays() { 
     relays =  localStorage.getItem('relays') ? 
@@ -39,6 +36,18 @@ function updateDisplay() {
     // Update localStorage
     localStorage.setItem('relays', relays.join(','));
 }
+
+// function showRelays() {
+//     const list = document.getElementById('showRelays');
+//     list.innerHTML = '';
+//     relays.forEach((relay, index) => {
+//         const li = document.createElement('li');
+//         li.innerHTML = `
+//             ${relay}
+//         `;
+//         list.appendChild(li);
+//     })
+//}
 
 function addRelay() {
     const input = document.getElementById('relayInput');

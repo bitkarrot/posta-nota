@@ -5,8 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="color-scheme" content="light dark">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"/>
-    <script src='https://www.unpkg.com/nostr-login@latest/dist/unpkg.js' data-perms="sign_event:1,sign_event:0" data-theme="dark"></script>
+    <script
+            src="https://www.unpkg.com/nostr-login@latest/dist/unpkg.js"
+            data-methods="extension,connect"
+            data-perms="sign_event:1,sign_event:0,nip04_encrypt"
+            data-theme="default"
+            data-dark-mode="true"></script>
+
     <script src="https://unpkg.com/nostr-tools/lib/nostr.bundle.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Posta Nota</title>
   </head>
   <body>
@@ -35,14 +42,21 @@
         <label for="content">Write your Kind 1 Content here:</label>
         <textarea id="content" name="content" rows="8" cols="50"></textarea>
       </form>
+
       <!-- Preview section -->
-      <h3>Preview:</h3>
-      <div id="preview"></div>
+      <!-- <h3>Preview:</h3>
+      <div class="mb-5" style="background-image: url('/images/background.png'); background-size: cover;background-position: center; " id="preview"></div> -->
 
       <div>
+        <br/>
       <!-- Submit button -->
-      <button id="postButton">Post it</button>
+      <!-- <button id="postButton">Post it</button> -->
+      <button id="sendButton" onclick="handleButtonClick()">Send Event</button>
+
       </div>
+    </main>
+    <main class="container">
+
     </main>
 
     <footer>
@@ -69,38 +83,35 @@
   <script src="./relay.js"></script>
 
   <script>
+
+          // Load relays from localStorage on page load
+          let relays = localStorage.getItem('relays') ?
+          localStorage.getItem('relays').split(',') : [];
+
+          console.log('Relays on index page :', relays);
+
           // Display preview as the user types
-          document.getElementById('content').addEventListener('input', function() {
+/*          document.getElementById('content').addEventListener('input', function() {
             const content = this.value;  // Get the value of the textarea
             const formattedContent = content.replace(/\n/g, '<br>');  // Replace newlines with <br> tags
             document.getElementById('preview').innerHTML = formattedContent;  // Update the preview section
           });
+*/
 
-          // Handle form submission when "Post it" button is clicked
-          document.getElementById('postButton').addEventListener('click', function (e) {
+        // Handle form submission when "Post it" button is clicked
+/*          document.getElementById('postButton').addEventListener('click', async function (e) {
             e.preventDefault();  // Prevent the form from submitting normally (refreshing the page)
 
             const content = document.getElementById('content').value;  // Get the value of the textarea
 
             // For demonstration purposes, you can display an alert or send the data via API
-            alert('Content posted: ' + content);
+            //alert('Content posted: ' + content);
 
-            // You can replace the alert with actual form submission logic like:
-            // fetch('/submit', {
-            //   method: 'POST',
-            //   headers: {
-            //     'Content-Type': 'application/json'
-            //   },
-            //   body: JSON.stringify({ content })
-            // })
-            // .then(response => response.json())
-            // .then(data => {
-            //   console.log('Success:', data);
-            // })
-            // .catch((error) => {
-            //   console.error('Error:', error);
-            // });
+           await sendEvent(content, window.nostr.getPublicKey(), relays);
+
           });
+          */
+
 
   </script>
 
