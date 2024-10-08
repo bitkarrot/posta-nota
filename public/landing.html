@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="color-scheme" content="light dark">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"/>
-    <title>Relay List Manager</title>
+    <title>Posta Nota</title>
     <style>
         .input-group {
             margin-bottom: 20px;
@@ -38,27 +38,18 @@
     </style>
 </head>
 <body>
-    <h1>Relay List Manager</h1>
-    <p>NOTE: These relays are stored in your browser's local storage.
-        If you clear your browser cache, your relays will be cleared as well.
-    </p>
-
-    <div class="input-group">
-        <input type="text" id="relayInput" placeholder="Enter relay name">
-        <button onclick="addRelay()">Add Relay</button>
-    </div>
-    
-    <ul id="relayList"></ul>
-    
-    <button onclick="deleteSelected()">Delete Selected</button>
-
-    <hr/>
     <main class="container-fluid">
-        <div>
-        Go to <a href="/"><button class="secondary"> Post a Note </button></a>
+        <div class="grid">
+            <div class="col" style="text-align: center;">
+              
+            <h1>Posta Nota</h1>
+            <i> A simple nostr kind 1 posting app</i>
+            <p>
+                <img src="/images/nostrnote.png" alt="postanota" style="width: 300px;"/>
+            </p>
+            </div>
         </div>
     </main>
-
 </body>
 
 </html>

@@ -119,7 +119,6 @@ function displayUserInfo() {
                 avatarElement.src = user.picture;
                 avatarElement.style.display = 'block';
 
-
             } else {
                 console.log("No user info available (empty array)");
             }
@@ -130,22 +129,16 @@ function displayUserInfo() {
 }
 
 function clearUserInfo() { 
-    // localStorage.removeItem('__nostrlogin_accounts');
     loggedIn = false;
     document.getElementById('npub').innerHTML = '';
     document.getElementById('avatar').style.display = 'none';
     updateButtonVisibility(); // login/logout button visibility
-
 }
 
 async function sendEvent(textNote, publicKey, defaultRelays) {
     try {
-        // let hiveRelays = ['wss://testnet.plebnet.dev/nostrrelay/XmnWyifA'];
-        // Create a list of relays
-        //let hiveRelays = [];
-        //let allrelays = [...hiveRelays, ...defaultRelays];
-        //const relays = [...hiveRelays]
-        let allrelays = defaultRelays;
+        let hiveRelays = ['wss://testnet.plebnet.dev/nostrrelay/1'];
+        let allrelays = [...hiveRelays, ...defaultRelays];
         console.log('send Event - Relays:', allrelays);
         // Create an event
         const event = {
@@ -194,9 +187,6 @@ async function sendEvent(textNote, publicKey, defaultRelays) {
                 },
             },
         );
-
-
-
     } catch (error) {
         console.error('An error occurred:', error);
         Swal.fire({
@@ -211,4 +201,4 @@ async function sendEvent(textNote, publicKey, defaultRelays) {
 function handleButtonClick() {
     const content = document.getElementById('content').value;
     sendEvent(content, pubkey, relays);
-  }
+}

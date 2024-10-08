@@ -37,18 +37,6 @@ function updateDisplay() {
     localStorage.setItem('relays', relays.join(','));
 }
 
-// function showRelays() {
-//     const list = document.getElementById('showRelays');
-//     list.innerHTML = '';
-//     relays.forEach((relay, index) => {
-//         const li = document.createElement('li');
-//         li.innerHTML = `
-//             ${relay}
-//         `;
-//         list.appendChild(li);
-//     })
-//}
-
 function addRelay() {
     const input = document.getElementById('relayInput');
     const newRelay = input.value.trim();

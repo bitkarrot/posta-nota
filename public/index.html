@@ -44,13 +44,12 @@
       </form>
 
       <!-- Preview section -->
-      <!-- <h3>Preview:</h3>
-      <div class="mb-5" style="background-image: url('/images/background.png'); background-size: cover;background-position: center; " id="preview"></div> -->
+      <h3>Preview:</h3>
+      <div class="mb-5" style="background-image: url('/images/background.png'); background-size: cover;background-position: center; " id="preview"></div>
 
       <div>
         <br/>
       <!-- Submit button -->
-      <!-- <button id="postButton">Post it</button> -->
       <button id="sendButton" onclick="handleButtonClick()">Send Event</button>
 
       </div>
@@ -83,35 +82,17 @@
   <script src="./relay.js"></script>
 
   <script>
-
           // Load relays from localStorage on page load
           let relays = localStorage.getItem('relays') ?
           localStorage.getItem('relays').split(',') : [];
-
           console.log('Relays on index page :', relays);
 
           // Display preview as the user types
-/*          document.getElementById('content').addEventListener('input', function() {
+          document.getElementById('content').addEventListener('input', function() {
             const content = this.value;  // Get the value of the textarea
             const formattedContent = content.replace(/\n/g, '<br>');  // Replace newlines with <br> tags
             document.getElementById('preview').innerHTML = formattedContent;  // Update the preview section
           });
-*/
-
-        // Handle form submission when "Post it" button is clicked
-/*          document.getElementById('postButton').addEventListener('click', async function (e) {
-            e.preventDefault();  // Prevent the form from submitting normally (refreshing the page)
-
-            const content = document.getElementById('content').value;  // Get the value of the textarea
-
-            // For demonstration purposes, you can display an alert or send the data via API
-            //alert('Content posted: ' + content);
-
-           await sendEvent(content, window.nostr.getPublicKey(), relays);
-
-          });
-          */
-
 
   </script>
 
