@@ -148,7 +148,7 @@ function clearUserInfo() {
 
 async function sendEvent(textNote, publicKey, defaultRelays) {
     try {
-        let hiveRelays = ['wss://testnet.plebnet.dev/nostrrelay/1'];
+        let hiveRelays = ['wss://hivetalk.nostr1.com'];
         let allrelays = [...hiveRelays, ...defaultRelays];
         console.log('send Event - Relays:', allrelays);
         // Create an event
@@ -157,7 +157,7 @@ async function sendEvent(textNote, publicKey, defaultRelays) {
             pubkey: publicKey,
             created_at: Math.floor(Date.now() / 1000),
             tags: [],
-            content: textNote + '\n via #PostaNota',
+            content: textNote + '\n\n\n via #PostaNota',
         };
         console.log('Kind 1 - Event created', event);
 

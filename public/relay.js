@@ -2,6 +2,10 @@
 function getRelays() { 
     relays =  localStorage.getItem('relays') ? 
     localStorage.getItem('relays').split(',') : [];
+    if (relays.length === 0) {
+        relays = ['wss://damus.io', 'wss://primal.net', 'wss://nos.lol'];
+        localStorage.setItem('relays', relays.join(','));
+    }
     console.log('Relays:', relays);
     return relays;
 }
