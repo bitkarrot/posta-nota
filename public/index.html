@@ -16,6 +16,16 @@
   <link id="appleTouchIcon" rel="apple-touch-icon" href="../images/note200x200.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="../images/note200x200.png">
 
+  <style>
+    #preview img {
+        max-width: 100%;
+        height: auto;
+        margin: 10px 0;
+    }
+    #preview a {
+        word-break: break-all;
+    }
+</style>
 </head>
 
 <body>
@@ -97,20 +107,62 @@
 <script src="./relay.js"></script>
 
 <script>
-  // Load relays from localStorage on page load
-  let relays = localStorage.getItem('relays') ?
-    localStorage.getItem('relays').split(',') : [];
-  console.log('Relays on index page :', relays);
+// Load relays from localStorage on page load
+let relays = localStorage.getItem('relays') ?
+localStorage.getItem('relays').split(',') : [];
+console.log('Relays on index page :', relays);
 
-  // Display preview as the user types
-  document.getElementById('content').addEventListener('input', function () {
-    const content = this.value;  // Get the value of the textarea
-    const formattedContent = content.replace(/\n/g, '<br>');  // Replace newlines with <br> tags
-    document.getElementById('preview').innerHTML = formattedContent;  // Update the preview section
-  });
+// List of supported image extensions
+const imageExtensions = ['.gif', '.jpg', '.jpeg', '.png', '.webp', '.bmp', '.svg'];
 
+// Function to check if a URL is an image
+function isImageUrl(url) {
+    try {
+        const urlObject = new URL(url);
+        return imageExtensions.some(ext => urlObject.pathname.toLowerCase().endsWith(ext));
+    } catch {
+        return false;
+    }
+}
+
+// Function to process text and handle URLs
+function processContent(text) {
+    // Split the text into paragraphs
+    const paragraphs = text.split(/\n\n+/);
+    return paragraphs.map(paragraph => {
+        // Check if the paragraph is just a URL
+        if (/^https?:\/\/\S+$/.test(paragraph.trim())) {
+            if (isImageUrl(paragraph.trim())) {
+                return `<p><img src="${paragraph.trim()}" alt="User posted image"></p>`;
+            }
+            return `<p><a href="${paragraph.trim()}" target="_blank">${paragraph.trim()}</a></p>`;
+        }
+
+        // Process URLs within paragraphs
+        let processedParagraph = paragraph.replace(/(https?:\/\/[^\s]+)/g, url => {
+            if (isImageUrl(url)) {
+                return `<img src="${url}" alt="User posted image">`;
+            }
+            return `<a href="${url}" target="_blank">${url}</a>`;
+        });
+
+        // Replace line breaks and apply formatting
+        processedParagraph = processedParagraph
+            .replace(/\n/g, '<br>') // Replace single line breaks
+            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') // Bold text
+            .replace(/\*(.*?)\*/g, '<em>$1</em>'); // Italic text
+
+        return `<p>${processedParagraph}</p>`;
+    }).join('');
+}
+
+// Enhanced preview functionality
+document.getElementById('content').addEventListener('input', function() {
+    const content = this.value;
+    const formattedContent = processContent(content);
+    document.getElementById('preview').innerHTML = formattedContent;
+});
 </script>
+
 </body>
-
-
 </html>

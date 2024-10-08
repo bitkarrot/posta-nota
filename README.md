@@ -4,7 +4,7 @@ A simple nostr kind 1 posting app.
 No distractions, no nonsense, only posting 
 to help you stay focused and efficient on your content.
 
-<img src="/postanota.png" width="400">
+<img src="/otherimages/postanota.png" width="400">
 
 
 ## How to use
@@ -17,13 +17,19 @@ Once your relays are setup, you can post to them on the main page and see your c
 
 That's it! 
 
-Super simple. No Extras. 
+Super simple. No Extras. No nonsense. No distractions. On Nostr.
 
 ## Set your relays
-<img width="573" alt="Screenshot 2024-10-08 at 1 32 43 AM" src="https://github.com/user-attachments/assets/af3a6987-ddb0-4d34-b5f1-6c561a078c8e">
+<img width="573" alt="Set your relays" src="/otherimages/relaymgr.png">
 
 ## Post a note
-<img width="573" alt="Screenshot 2024-10-08 at 1 32 13 AM" src="https://github.com/user-attachments/assets/b0746583-0adf-41e5-8065-8a561b9e391c">
 
+with image previews.
+
+<img src="/otherimages/previewimage.png" alt="Preview image" width="400">
+
+zoom'd in view on the post a note with image
+
+<img src="/otherimages/zoomedimage.png" alt="Zoomed preview image" width="400">
 
 
