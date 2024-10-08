@@ -7,13 +7,14 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"/>
     <title>Relay List Manager</title>
     <style>
-/*        body {
+        /*   
+        body {
             font-family: Arial, sans-serif;
             max-width: 500px;
             margin: 20px auto;
             padding: 0 20px;
         }
-            */
+        */
         .input-group {
             margin-bottom: 20px;
         }
@@ -46,7 +47,10 @@
 </head>
 <body>
     <h1>Relay List Manager</h1>
-    
+    <p>NOTE: These relays are stored in your browser's local storage.
+        If you clear your browser cache, your relays will be cleared as well.
+    </p>
+
     <div class="input-group">
         <input type="text" id="relayInput" placeholder="Enter relay name">
         <button onclick="addRelay()">Add Relay</button>

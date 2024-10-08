@@ -7,13 +7,14 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"/>
     <script src='https://www.unpkg.com/nostr-login@latest/dist/unpkg.js' data-perms="sign_event:1,sign_event:0" data-theme="dark"></script>
     <script src="https://unpkg.com/nostr-tools/lib/nostr.bundle.js"></script>
-    <title>Nota</title>
+    <title>Posta Nota</title>
   </head>
   <body>
     <main class="container">
       <nav>
           <ul>
-            <li><strong><a href="/">nota.hivetalk.org</a></strong></li>
+            <li>
+              <a href="/"><img src="/images/nostrnote.png" alt="postanota" style="width: 100px;"/></a>
           </ul>
           <ul>
             <li><a href="#" id="setrelays">Relays</a></li>
@@ -25,7 +26,7 @@
     </main>
     <main class="container" id="main-container">
       <div>
-      <h1>Nota</h1>
+      <h1>Posta Nota</h1>
      </div>
       <div>
         <p id="npub"></p>
@@ -33,8 +34,15 @@
       <form id="noteForm">
         <label for="content">Write your Kind 1 Content here:</label>
         <textarea id="content" name="content" rows="8" cols="50"></textarea>
-        <input type="submit" value="Preview Note">
       </form>
+      <!-- Preview section -->
+      <h3>Preview:</h3>
+      <div id="preview"></div>
+
+      <div>
+      <!-- Submit button -->
+      <button id="postButton">Post it</button>
+      </div>
     </main>
 
     <footer>
@@ -46,7 +54,10 @@
         </ul>
         <ul>
         <li>
-          <a href="https://github.com/bitkarrot/nota">GitHub</a>
+          <a href="https://github.com/bitkarrot/posta-nota">GitHub</a>
+        </li>
+        <li>
+          <a href="/">posta.hivetalk.org</a>
         </li>
       </ul>
       </nav>
@@ -56,5 +67,41 @@
 
   <script src="./nostr.js"></script>
   <script src="./relay.js"></script>
+
+  <script>
+          // Display preview as the user types
+          document.getElementById('content').addEventListener('input', function() {
+            const content = this.value;  // Get the value of the textarea
+            const formattedContent = content.replace(/\n/g, '<br>');  // Replace newlines with <br> tags
+            document.getElementById('preview').innerHTML = formattedContent;  // Update the preview section
+          });
+
+          // Handle form submission when "Post it" button is clicked
+          document.getElementById('postButton').addEventListener('click', function (e) {
+            e.preventDefault();  // Prevent the form from submitting normally (refreshing the page)
+
+            const content = document.getElementById('content').value;  // Get the value of the textarea
+
+            // For demonstration purposes, you can display an alert or send the data via API
+            alert('Content posted: ' + content);
+
+            // You can replace the alert with actual form submission logic like:
+            // fetch('/submit', {
+            //   method: 'POST',
+            //   headers: {
+            //     'Content-Type': 'application/json'
+            //   },
+            //   body: JSON.stringify({ content })
+            // })
+            // .then(response => response.json())
+            // .then(data => {
+            //   console.log('Success:', data);
+            // })
+            // .catch((error) => {
+            //   console.error('Error:', error);
+            // });
+          });
+
+  </script>
 
 </html>
