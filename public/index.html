@@ -1,99 +1,112 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="color-scheme" content="light dark">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"/>
-    <script
-            src="https://www.unpkg.com/nostr-login@latest/dist/unpkg.js"
-            data-methods="extension,connect"
-            data-perms="sign_event:1,sign_event:0,nip04_encrypt"
-            data-theme="default"
-            data-dark-mode="true"></script>
 
-    <script src="https://unpkg.com/nostr-tools/lib/nostr.bundle.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <title>Posta Nota</title>
-  </head>
-  <body>
-    <main class="container">
-      <nav>
-          <ul>
-            <li>
-              <a href="/"><img src="/images/nostrnote.png" alt="postanota" style="width: 100px;"/></a>
-          </ul>
-          <ul>
-            <li><a href="#" id="setrelays">Relays</a></li>
-            <img id="avatar" src="" alt="Avatar" style="display:none; width: 45px; height: 45px; border-radius: 50%;"/>
-            <li><button id="signupButton">Login</button> </li>
-            <li><button id="logoutButton">Logout</button> </li>
-          </ul>
-      </nav>
-    </main>
-    <main class="container" id="main-container">
-      <div>
-      <h1>Posta Nota</h1>
-     </div>
-      <div>
-        <p id="npub"></p>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css" />
+  <script src="https://www.unpkg.com/nostr-login@latest/dist/unpkg.js" data-methods="extension,connect"
+    data-perms="sign_event:1,sign_event:0,nip04_encrypt" data-theme="default" data-dark-mode="true"></script>
+
+  <script src="https://unpkg.com/nostr-tools/lib/nostr.bundle.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <title>Posta Nota</title>
+</head>
+
+<body>
+  <main class="container">
+    <nav>
+      <ul>
+        <li>
+          <a href="/"><img src="/images/nostrnote.png" alt="postanota" style="width: 100px;" /></a>
+      </ul>
+      <ul>
+        <li><a href="" id="setrelays">Relays</a></li>
+        <li><button id="signupButton">Login</button> </li>
+        <li><button id="logoutButton">Logout</button> </li>
+      </ul>
+    </nav>
+  </main>
+
+  <main class="container" id="landing">
+    <main class="container-fluid">
+      <div class="grid">
+        <div class="col" style="text-align: center;">
+          <h1>Posta Nota</h1>
+          <i> A simple nostr kind 1 posting app</i>
+          <p>
+            <img src="/images/nostrnote.png" alt="postanota" style="width: 300px;" />
+          </p>
+        </div>
       </div>
-      <form id="noteForm">
-        <label for="content">Write your Kind 1 Content here:</label>
-        <textarea id="content" name="content" rows="8" cols="50"></textarea>
-      </form>
+    </main>
+</main>
 
-      <!-- Preview section -->
-      <h3>Preview:</h3>
-      <div class="mb-5" style="background-image: url('/images/background.png'); background-size: cover;background-position: center; " id="preview"></div>
+  <main class="container" id="main-container">
+    <div>
+      <h1>Posta Nota</h1>
+    </div>
+    <div>
+      <p id="npub"></p>
+      <img id="avatar" src="" alt="Avatar" style="display:none; width: 45px; height: 45px; border-radius: 50%;" />
+      <p style="margin-top: 20px;"> First time here? <b>Be sure to setup your Relays.</b>
+    </div>
+    <form id="noteForm">
+      <label for="content">Write your Kind 1 Content here:</label>
+      <textarea id="content" name="content" rows="8" cols="50"></textarea>
+    </form>
 
-      <div>
-        <br/>
+    <!-- Preview section -->
+    <h3>Preview:</h3>
+    <div class="mb-5"
+      style="background-image: url('/images/background.png'); background-size: cover;background-position: center; "
+      id="preview"></div>
+
+    <div>
+      <br />
       <!-- Submit button -->
       <button id="sendButton" onclick="handleButtonClick()">Send Event</button>
+    </div>
+  </main>
 
-      </div>
-    </main>
+  <footer>
+    <hr />
     <main class="container">
-
-    </main>
-
-    <footer>
-      <hr/>
-      <main class="container">
-        <nav>
+      <nav>
         <ul>
           Copyright © 2024 Bitkarrot
         </ul>
         <ul>
-        <li>
-          <a href="https://github.com/bitkarrot/posta-nota">GitHub</a>
-        </li>
-        <li>
-          <a href="/">posta.hivetalk.org</a>
-        </li>
-      </ul>
+          <li>
+            <a href="https://github.com/bitkarrot/posta-nota">GitHub</a>
+          </li>
+          <li>
+            <a href="/">posta.hivetalk.org</a>
+          </li>
+        </ul>
       </nav>
-      </main>
-    </footer>
-  </body>
+    </main>
+  </footer>
 
-  <script src="./nostr.js"></script>
-  <script src="./relay.js"></script>
+<script src="./nostr.js"></script>
+<script src="./relay.js"></script>
 
-  <script>
-          // Load relays from localStorage on page load
-          let relays = localStorage.getItem('relays') ?
-          localStorage.getItem('relays').split(',') : [];
-          console.log('Relays on index page :', relays);
+<script>
+  // Load relays from localStorage on page load
+  let relays = localStorage.getItem('relays') ?
+    localStorage.getItem('relays').split(',') : [];
+  console.log('Relays on index page :', relays);
 
-          // Display preview as the user types
-          document.getElementById('content').addEventListener('input', function() {
-            const content = this.value;  // Get the value of the textarea
-            const formattedContent = content.replace(/\n/g, '<br>');  // Replace newlines with <br> tags
-            document.getElementById('preview').innerHTML = formattedContent;  // Update the preview section
-          });
+  // Display preview as the user types
+  document.getElementById('content').addEventListener('input', function () {
+    const content = this.value;  // Get the value of the textarea
+    const formattedContent = content.replace(/\n/g, '<br>');  // Replace newlines with <br> tags
+    document.getElementById('preview').innerHTML = formattedContent;  // Update the preview section
+  });
 
-  </script>
+</script>
+</body>
+
 
 </html>

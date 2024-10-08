@@ -21,14 +21,24 @@ function checkLoginStatus() {
 function updateButtonVisibility() {
   const loginButton = document.getElementById('signupButton');
   const logoutButton = document.getElementById('logoutButton');
-  
+  const setRelays = document.getElementById('setrelays');
+  const landing = document.getElementById('landing');
+  const mainContainer = document.getElementById('main-container');
+
   if (loggedIn) {
       loginButton.style.display = 'none';
+      setRelays.style.display = 'block';
       logoutButton.style.display = 'block';
+      landing.style.display = 'none';
+      mainContainer.style.display = 'block';
+
   } else {
       loginButton.style.display = 'block';
+      setRelays.style.display = 'none';
       logoutButton.style.display = 'none';
-  }
+      landing.style.display = 'block';
+      mainContainer.style.display = 'none';
+    }
 }
 
 document.addEventListener('DOMContentLoaded', (event) => {
@@ -132,6 +142,7 @@ function clearUserInfo() {
     loggedIn = false;
     document.getElementById('npub').innerHTML = '';
     document.getElementById('avatar').style.display = 'none';
+    document.getElementById('setrelays').style.display = 'none';
     updateButtonVisibility(); // login/logout button visibility
 }
 

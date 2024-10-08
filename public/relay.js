@@ -6,6 +6,7 @@ function getRelays() {
     return relays;
 }
 
+document.addEventListener('DOMContentLoaded', function() {
 document.getElementById('setrelays').addEventListener('click', function(event) {    
     event.preventDefault(); // Prevent default anchor behavior
     fetch('/relay.html') // Adjust the path if necessary
@@ -21,6 +22,7 @@ document.getElementById('setrelays').addEventListener('click', function(event) {
         console.error('Error loading relay.html:', error);
       });
   });
+});
 
 function updateDisplay() {
    const list = document.getElementById('relayList');
