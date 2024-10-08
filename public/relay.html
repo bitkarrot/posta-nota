@@ -1,32 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="color-scheme" content="light dark">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css" />
     <title>Relay List Manager</title>
     <style>
         .input-group {
             margin-bottom: 20px;
         }
+
         input[type="text"] {
             padding: 8px;
             width: 70%;
         }
+
         button {
             padding: 8px 15px;
             cursor: pointer;
         }
+
         ul {
             list-style-type: none;
             padding: 0;
         }
+
         li {
             display: flex;
             align-items: center;
             margin-bottom: 10px;
         }
+
         .delete-btn {
             margin-left: 10px;
             background-color: #ff4444;
@@ -37,26 +43,27 @@
         }
     </style>
 </head>
+
 <body>
     <h1>Relay List Manager</h1>
     <p>NOTE: These relays are stored in your browser's local storage.
         If you clear your browser cache, your relays will be cleared as well.
-        <br/> <br/> Some default relays are set initially here for you.
+        <br /> <br /> Some default relays are set initially here for you.
     </p>
 
     <div class="input-group">
         <input type="text" id="relayInput" placeholder="Enter relay name">
         <button onclick="addRelay()">Add Relay</button>
     </div>
-    
+
     <ul id="relayList"></ul>
-    
+
     <button onclick="deleteSelected()">Delete Selected</button>
 
-    <hr/>
+    <hr />
     <main class="container-fluid">
         <div>
-        Go <a href="/"><button class="secondary"> Post a Note </button></a>
+            Go <a href="/"><button class="secondary"> Post a Note </button></a>
         </div>
     </main>
 

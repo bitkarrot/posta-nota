@@ -1,8 +1,8 @@
 var loggedIn;
-
 let pubkey = "";
+
 // Access the functions from the global object
-const { relayInit, generateSecretKey, getPublicKey, SimplePool} = NostrTools;
+const { relayInit, generateSecretKey, getPublicKey, SimplePool } = NostrTools;
 const nip19 = NostrTools.nip19;
 
 checkLoginStatus();
@@ -12,32 +12,31 @@ function checkLoginStatus() {
     const userInfo = JSON.parse(localStorage.getItem('__nostrlogin_accounts'));
     if (userInfo && userInfo.length > 0) {
         loggedIn = true
-    } else{
+    } else {
         loggedIn = false
     }
 }
 
-// At the top of your JavaScript file, add:
 function updateButtonVisibility() {
-  const loginButton = document.getElementById('signupButton');
-  const logoutButton = document.getElementById('logoutButton');
-  const setRelays = document.getElementById('setrelays');
-  const landing = document.getElementById('landing');
-  const mainContainer = document.getElementById('main-container');
+    const loginButton = document.getElementById('signupButton');
+    const logoutButton = document.getElementById('logoutButton');
+    const setRelays = document.getElementById('setrelays');
+    const landing = document.getElementById('landing');
+    const mainContainer = document.getElementById('main-container');
 
-  if (loggedIn) {
-      loginButton.style.display = 'none';
-      setRelays.style.display = 'block';
-      logoutButton.style.display = 'block';
-      landing.style.display = 'none';
-      mainContainer.style.display = 'block';
+    if (loggedIn) {
+        loginButton.style.display = 'none';
+        setRelays.style.display = 'block';
+        logoutButton.style.display = 'block';
+        landing.style.display = 'none';
+        mainContainer.style.display = 'block';
 
-  } else {
-      loginButton.style.display = 'block';
-      setRelays.style.display = 'none';
-      logoutButton.style.display = 'none';
-      landing.style.display = 'block';
-      mainContainer.style.display = 'none';
+    } else {
+        loginButton.style.display = 'block';
+        setRelays.style.display = 'none';
+        logoutButton.style.display = 'none';
+        landing.style.display = 'block';
+        mainContainer.style.display = 'none';
     }
 }
 
@@ -55,7 +54,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         document.getElementById('logoutButton').addEventListener('click', onLogoutClick);
         updateButtonVisibility();
 
-   } else {
+    } else {
         console.error('Nostr Login script is not loaded correctly.');
     }
 });
@@ -68,23 +67,20 @@ document.addEventListener('nlAuth', (e) => {
             console.log("Logging In")
             loggedIn = true
             updateButtonVisibility(); // login/logout button visibility
-            //onLogin();  // get pubkey with window.nostr and show user profile
-            setTimeout(function() {
+            setTimeout(function () {
                 loadUser();
             }, 200);
         }
     } else {
-    // onLogout()  // clear local user data, hide profile info 
-    if (loggedIn) {
-        setTimeout(function() {
-            console.log("logoff section")
-            loggedIn = false
-            clearUserInfo();
-            document.dispatchEvent(new Event("nlLogout")); // logout from nostr-login
-            updateButtonVisibility(); // login/logout button visibility
-            // logOff()
-        }, 200);
-    }
+        if (loggedIn) {
+            setTimeout(function () {
+                console.log("logoff section")
+                loggedIn = false
+                clearUserInfo();
+                document.dispatchEvent(new Event("nlLogout")); // logout from nostr-login
+                updateButtonVisibility(); // login/logout button visibility
+            }, 200);
+        }
     }
 })
 
@@ -95,9 +91,9 @@ function loadUser() {
                 loggedIn = true
                 // npubkey = pubkey
                 console.log("fetched pubkey", pubkey)
-                displayUserInfo();        
+                displayUserInfo();
                 updateButtonVisibility(); // login/logout button visibility         
-            } 
+            }
         }).catch((err) => {
             console.log("LoadUser Err", err);
             console.log("logoff section")
@@ -138,7 +134,7 @@ function displayUserInfo() {
     }, 200); // Delay to ensure data is loaded
 }
 
-function clearUserInfo() { 
+function clearUserInfo() {
     loggedIn = false;
     document.getElementById('npub').innerHTML = '';
     document.getElementById('avatar').style.display = 'none';
