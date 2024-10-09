@@ -142,9 +142,15 @@ function clearUserInfo() {
     updateButtonVisibility(); // login/logout button visibility
 }
 
-async function sendEvent(textNote, publicKey, defaultRelays) {
+async function sendEvent(textNote, publicKey, defaultRelays, nofooter) {
     try {
         let hiveRelays = ['wss://hivetalk.nostr1.com'];
+        let footer = '\n\n\n via #PostaNota';
+        // #PostaNotahashtag required to post to hive relay if not a relay member
+        if (nofooter === true) {
+            hiveRelays = [];
+            footer = '';
+        }
         let allrelays = [...hiveRelays, ...defaultRelays];
         console.log('send Event - Relays:', allrelays);
         // Create an event
@@ -153,7 +159,7 @@ async function sendEvent(textNote, publicKey, defaultRelays) {
             pubkey: publicKey,
             created_at: Math.floor(Date.now() / 1000),
             tags: [],
-            content: textNote + '\n\n\n via #PostaNota',
+            content: textNote + footer,
         };
         console.log('Kind 1 - Event created', event);
 
@@ -207,5 +213,6 @@ async function sendEvent(textNote, publicKey, defaultRelays) {
 
 function handleButtonClick() {
     const content = document.getElementById('content').value;
-    sendEvent(content, pubkey, relays);
+    const omitFooter = document.getElementById('omitFooter').checked;
+    sendEvent(content, pubkey, relays, omitFooter);
 }
