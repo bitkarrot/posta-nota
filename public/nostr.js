@@ -113,29 +113,23 @@ function displayUserInfo() {
         try {
             if (userInfo && userInfo.length > 0) {
                 const user = userInfo[0];
-
                 // get npub to use with link to nostr
                 pubkey = user.pubkey
-
-                document.getElementById('name').innerHTML = name;
                 let npub = nip19.npubEncode(user.pubkey)
                 var npubElement = document.getElementById('npub');
-
-                // set name
-                let name;
-                if (user && user.name !== undefined) {
-                    name = user.name;
-                } else {
-                    name = npub;
-                }
-
-                npubElement.innerHTML = "Hello, <a href='https://njump.me/" + npub + "'>" + name + "</a>";
 
                 // set avatar
                 const avatarElement = document.getElementById('avatar');
                 avatarElement.src = user.picture;
                 avatarElement.style.display = 'block';
 
+                // set username
+                let username = user.name;
+                if (username === undefined) {
+                    username = npub;
+                }
+                // set welcome message
+                npubElement.innerHTML = "Hello, <a href='https://njump.me/" + npub + "'>" + username + "</a>";
             } else {
                 console.log("No user info available (empty array)");
             }
