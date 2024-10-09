@@ -116,9 +116,20 @@ function displayUserInfo() {
 
                 // get npub to use with link to nostr
                 pubkey = user.pubkey
+
+                document.getElementById('name').innerHTML = name;
                 let npub = nip19.npubEncode(user.pubkey)
                 var npubElement = document.getElementById('npub');
-                npubElement.innerHTML = "Hello, <a href='https://njump.me/" + npub + "'>" + user.name + "</a>";
+
+                // set name
+                let name;
+                if (user && user.name !== undefined) {
+                    name = user.name;
+                } else {
+                    name = npub;
+                }
+
+                npubElement.innerHTML = "Hello, <a href='https://njump.me/" + npub + "'>" + name + "</a>";
 
                 // set avatar
                 const avatarElement = document.getElementById('avatar');
