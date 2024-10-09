@@ -14,6 +14,7 @@
 
   <script src="https://unpkg.com/nostr-tools/lib/nostr.bundle.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script defer src="https://cloud.umami.is/script.js" data-website-id="796c9ca2-6672-4c23-b998-d530fadf1345"></script>
   <title>Posta Nota</title>
   <link id="icon" rel="shortcut icon" href="../images/note200x200.png" />
   <link id="appleTouchIcon" rel="apple-touch-icon" href="../images/note200x200.png" />
@@ -88,12 +89,17 @@
       <div style="margin-bottom: 20px;">
         <label for="omitFooter">
           <input type="checkbox" id="omitFooter" name="omitFooter">
-          Omit #PostaNota footer
+          Omit <em data-tooltip=" Leave unchecked if you have no relays.">#PostaNota footer.</em>
         </label>
       </div>
       <!-- Submit button -->
       <button id="sendButton" onclick="handleButtonClick()">Send Event</button>
     </div>
+
+    <p style="margin-top: 20px;">
+      Notes with #PostaNota footer automagically sent to <a href="https://hivetalk.nostr1.com/">hivetalk relay.</a>
+    </p>
+
   </main>
 
   <footer>
